@@ -5,7 +5,7 @@ read -p "Enter the third number" c;
 
 declare -A operationResults;
 declare operationValues;
-i=0;
+count=0;
 
 result_1=$(($a+$b*$c));
 result_2=$(($a*$b+$c));
@@ -19,7 +19,22 @@ operationResults[4]=$result_4;
 
 for key in "${!operationResults[@]}"
 do
-	operationValues[$i]="${operationResults[$key]}";
-	i=$(($i+1));
+	operationValues[$count]="${operationResults[$key]}";
+	count=$(($count+1));
 done
+
+n=4;
+for ((i=0; i<$(($n-1)); i++))
+do
+	for ((j=0; j<$(($n-1)); j++))
+	do
+		if [ "${operationValues[j]}" -lt "${operationValues[$(($j+1))]}" ];
+		then
+			temp=${operationValues[j]};
+			operationValues[j]=${operationValues[$(($j+1))]};
+			operationValues[$((j+1))]=$temp;
+		fi
+	done
+done
+
 echo "${operationValues[@]}";
