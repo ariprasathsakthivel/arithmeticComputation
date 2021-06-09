@@ -5,4 +5,5 @@ read -p "Enter the third number" c;
 result_1=$(($a+$b*$c));
 result_2=$(($a*$b+$c));
 result_3=$(($c+$a/$b));
+result_4=$(($a%$b+$c));
 
